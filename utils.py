@@ -17,7 +17,9 @@ class Metrics():
         self.metrics_dict: Dict[List] = {
             "diffusion_loss": [],
             "reward_loss": [],
-            "actor_critic_loss": [],
+            "critic_loss": [],
+            "policy_loss": [],
+            "entropy_loss": [],
             "diffusion_grad_norm": [],
             "reward_grad_norm": [],
             "actor_critic_grad_norm": [],
@@ -31,7 +33,9 @@ class Metrics():
         self.temp_metrics_dict = {
             "diffusion_loss": [],
             "reward_loss": [],
-            "actor_critic_loss": [],
+            "critic_loss": [],
+            "policy_loss": [],
+            "entropy_loss": [],
             "diffusion_grad_norm": [],
             "reward_grad_norm": [],
             "actor_critic_grad_norm": [],
@@ -41,11 +45,12 @@ class Metrics():
             "gpu/max_memory_reserved_gb": 0
         }
 
-    def add_metric(self, loss: float, key: str, model=None):
+    def add_metric(self, loss: float | None, key: str, model=None):
         if model is not None:
             grad_norm = torch.nn.utils.get_total_norm([p.grad for p in model.parameters() if p.grad is not None], norm_type=2.0)
             self.temp_metrics_dict[key + "_grad_norm"].append(grad_norm.item())
-        self.temp_metrics_dict[key + "_loss"].append(loss)
+        if loss is not  None:
+            self.temp_metrics_dict[key + "_loss"].append(loss)
 
     def log_metrics(self, epoch: int):
         self.logger.info(f"Epoch {epoch} metrics:")
@@ -118,16 +123,21 @@ def preprocess(obs: np.array) -> torch.Tensor:
     obs = obs.to("cuda").unsqueeze(0)
     return obs
 
-def policy_loss(logits: torch.Tensor, actions: torch.Tensor, lambda_returns: torch.Tensor, values: torch.Tensor, eta: float = 1e-3, mask: torch.Tensor | None = None) -> torch.Tensor:
+def policy_loss(logits: torch.Tensor, actions: torch.Tensor, lambda_returns: torch.Tensor, values: torch.Tensor, eta: float = 1e-3, mask: torch.Tensor | None = None) -> Tuple[torch.Tensor]:
     dist = Categorical(logits=logits)
     log_prob = dist.log_prob(actions)        
     advantage = (lambda_returns - values).detach()  
-    entropy = dist.entropy()                
-    objective = log_prob * advantage + eta * entropy
+    entropy = dist.entropy()  
+    policy_objective = log_prob * advantage    
+    entropy_objective = eta * entropy
+
     if mask is not None:
-        objective = objective.masked_fill(~mask, 0.0)
-    loss_pi = -objective.sum(dim=1).mean()
-    return loss_pi
+        policy_objective = policy_objective.masked_fill(~mask, 0.0)
+        entropy_objective = entropy_objective.masked_fill(~mask, 0.0)
+
+    policy_loss = -policy_objective.sum(dim=1).mean()
+    entropy_loss = -entropy_objective.sum(dim=1).mean()
+    return policy_loss, entropy_loss
 
 def display(image: np.array):
     import matplotlib.pyplot as plt
