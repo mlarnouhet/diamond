@@ -101,15 +101,16 @@ def setup_logs(args: Namespace) -> Logger:
 
     return logging.getLogger(__name__)
 
-def setup_wnb(args: Namespace):
+def setup_wnb(args: Namespace) -> wandb.Run:
     if args.setup_wandb:
-        wandb.init(
+        run = wandb.init(
         project=f"Diamond",
         name=f"run__{args.task_name}_{args.run_id}",
         config=vars(args)
     )
         wandb.define_metric("epoch")
         wandb.define_metric("*", step_metric="epoch")
+        return run
 
 def preprocess(obs: np.array) -> torch.Tensor:
     obs = np.ascontiguousarray(obs)

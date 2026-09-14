@@ -9,7 +9,6 @@ from runner import Runner
 def main(args: Namespace):
     set_seed(args.seed)
     setup_dirs(args)
-    setup_wnb(args)
     logger = setup_logs(args)
     runner = Runner(args, logger)
     runner.run()

@@ -4,6 +4,7 @@ from logging import Logger
 from typing import Tuple, List, Dict
 from tqdm import tqdm
 import numpy as np
+import wandb
 import torch
 import torch.nn as nn
 from torch.distributions import Categorical, Bernoulli
@@ -21,6 +22,7 @@ class Runner(nn.Module):
         super().__init__()
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.logger = logger
+        self.wandb_run_id = ""
         self.run_id = args.run_id
         self.env_id = args.env_id
         self.n_epochs = args.n_epochs
@@ -58,11 +60,13 @@ class Runner(nn.Module):
 
         if args.resume:
             self._load_checkpoint(args)
+            self.wandb_run_id = self._setup_wnb(args)
             logger.info(f"Resuming run {args.run_id} on env {args.env_id} at epoch {self.start_epoch}")
             for key, value in vars(args).items():
                 self.logger.info(f"{key}: {value}")
         else:
             logger.info(f"Starting run {args.run_id} on env {args.env_id}")
+            self.wandb_run_id = self._setup_wnb(args)
             for key, value in vars(args).items():
                 self.logger.info(f"{key}: {value}")
 
@@ -340,7 +344,8 @@ class Runner(nn.Module):
                 "diffusion_optimizer": self.diffusion_optimizer.state_dict(),
                 "reward_optimizer": self.reward_optimizer.state_dict(),
                 "actor_critic_optimizer": self.actor_critic_optimizer.state_dict(),
-                "metrics_dict": self.metrics.metrics_dict
+                "metrics_dict": self.metrics.metrics_dict,
+                "wandb_run_id": self.wandb_run_id
             }, checkpoint_dir)
 
             self.dataset.save_dataset(dataset_dir)
@@ -362,6 +367,7 @@ class Runner(nn.Module):
         self.reward_optimizer.load_state_dict(checkpoint["reward_optimizer"])
         self.actor_critic_optimizer.load_state_dict(checkpoint["actor_critic_optimizer"])
         self.metrics.metrics_dict = checkpoint["metrics_dict"]
+        self.wandb_run_id = checkpoint["wandb_run_id"]
 
         self.dataset.load_dataset(dataset_dir)
         self.start_epoch = epoch + 1
@@ -386,6 +392,26 @@ class Runner(nn.Module):
         )
         upload_future_model.result()
         upload_future_data.result()
+
+    def _setup_wnb(self, args: Namespace) -> str:
+        if args.setup_wandb:
+            if args.resume:
+                run = wandb.init(
+                project=f"Diamond",
+                name=f"run__{args.task_name}_{args.run_id}",
+                id=self.wandb_run_id,
+                config=vars(args),
+                resume="must",
+            )
+            else:
+                run = wandb.init(
+                project=f"Diamond",
+                name=f"run__{args.task_name}_{args.run_id}",
+                config=vars(args),
+            )
+            wandb.define_metric("epoch")
+            wandb.define_metric("*", step_metric="epoch")
+            return run.id
 
     def finish(self):
         self.env.close()
