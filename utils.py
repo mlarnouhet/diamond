@@ -1,6 +1,6 @@
 import logging
 from logging import Logger
-from typing import Dict, List
+from typing import Dict, List, Tuple
 from pathlib import Path
 from argparse import Namespace
 import random
@@ -123,7 +123,7 @@ def preprocess(obs: np.array) -> torch.Tensor:
     obs = obs.to("cuda").unsqueeze(0)
     return obs
 
-def policy_loss(logits: torch.Tensor, actions: torch.Tensor, lambda_returns: torch.Tensor, values: torch.Tensor, eta: float = 1e-3, mask: torch.Tensor | None = None) -> Tuple[torch.Tensor]:
+def policy_loss_fn(logits: torch.Tensor, actions: torch.Tensor, lambda_returns: torch.Tensor, values: torch.Tensor, eta: float = 1e-3, mask: torch.Tensor | None = None) -> Tuple[torch.Tensor]:
     dist = Categorical(logits=logits)
     log_prob = dist.log_prob(actions)        
     advantage = (lambda_returns - values).detach()  

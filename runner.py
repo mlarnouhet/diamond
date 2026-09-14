@@ -13,7 +13,7 @@ import ale_py
 from models import ActorCriticNetwork, RewardEndNetwork
 from diffusion import EDMDiffusionModel
 from dataset import Dataset
-from utils import preprocess, policy_loss, Metrics
+from utils import preprocess, policy_loss_fn, Metrics
 
 
 class Runner(nn.Module):
@@ -233,13 +233,16 @@ class Runner(nn.Module):
             action_logits = torch.stack(logits_list, dim=1)
             actions = torch.stack(action_list, dim=1)
             loss_mask = torch.stack(loss_masks, dim=1)
-            loss_v = ((values - lambdas)**2).masked_fill(~loss_mask, 0.0).sum(dim=-1).mean()
-            loss_pi = policy_loss(action_logits, actions, lambdas, values, self.entropy_weight, mask=loss_mask)
-            loss = loss_pi + loss_v
+            critic_loss = ((values - lambdas)**2).masked_fill(~loss_mask, 0.0).sum(dim=-1).mean()
+            policy_loss, entropy_loss = policy_loss_fn(action_logits, actions, lambdas, values, self.entropy_weight, mask=loss_mask)
+            loss = policy_loss + entropy_loss + critic_loss
 
         self.actor_critic_optimizer.zero_grad()
         loss.backward()
-        self.metrics.add_metric(loss.item(), "actor_critic", self.actor_critic_model if log_grad_norm else None)
+        self.metrics.add_metric(None, "actor_critic", self.actor_critic_model if log_grad_norm else None)
+        self.metrics.add_metric(policy_loss.item(), "policy")
+        self.metrics.add_metric(critic_loss.item(), "critic")
+        self.metrics.add_metric(entropy_loss.item(), "entropy")
         self.actor_critic_optimizer.step()
 
     def _process_batch(self, batch: torch.Tensor, mode: str | None = None) -> Tuple[torch.Tensor | None]:
