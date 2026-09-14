@@ -46,7 +46,7 @@ if __name__ == "__main__":
     parser.add_argument("--enable_tf32", type=bool, default=True)
     parser.add_argument("--enable_mixed_precision", type=bool, default=True)
     parser.add_argument("--debug", type=bool, default=True)
-    parser.add_argument("--hf_repo_id", type=str, default="diamond")
+    parser.add_argument("--hf_repo_id", type=str, default="Marcorico/diamond")
     parser.add_argument("--epoch_to_load", type=int, default=0)
     args = parser.parse_args()
     main(args)
