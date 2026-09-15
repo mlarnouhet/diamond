@@ -288,9 +288,7 @@ class Runner(nn.Module):
         self.diffusion_model.cuda()
 
         if not args.debug:
-            self.actor_critic_model = torch.compile(self.actor_critic_model)
-            self.reward_end_model = torch.compile(self.reward_end_model)
-            self.diffusion_model = torch.compile(self.diffusion_model)
+            self._compile_models()
 
     def _setup_optims(self, args: Namespace):
         self.diffusion_optimizer = torch.optim.AdamW(
@@ -419,6 +417,24 @@ class Runner(nn.Module):
             return run
         else:
             return None
+
+    def _compile_models(self):
+        for model in (
+            self.actor_critic_model,
+            self.reward_end_model,
+            self.diffusion_model,
+        ):
+            model.compile()
+
+        self.actor_critic_model.burn_in = torch.compile(
+            self.actor_critic_model.burn_in
+        )
+        self.reward_end_model.burn_in = torch.compile(
+            self.reward_end_model.burn_in
+        )
+        self.diffusion_model.sample = torch.compile(
+            self.diffusion_model.sample
+        )
 
     def finish(self):
         self.env.close()
