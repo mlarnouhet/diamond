@@ -41,7 +41,7 @@ class Runner(nn.Module):
         self.hf_repo_id = args.hf_repo_id
 
         self.mixed_prec_dtype = torch.bfloat16 
-        self.start_epoch = 1 if args.debug else 0
+        self.start_epoch = 1 if args.debug else 1
         self.metrics = Metrics(args, logger)
 
         if args.enable_tf32:

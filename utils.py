@@ -2,6 +2,7 @@ import logging
 from logging import Logger
 from typing import Dict, List, Tuple
 from pathlib import Path
+import shutil
 from argparse import Namespace
 import random
 import numpy as np
@@ -79,15 +80,25 @@ def set_seed(seed: int) -> None:
     torch.cuda.manual_seed_all(seed)
 
 def setup_dirs(args: Namespace):
-    checkpoint_dir = Path(f"checkpoints/run_{args.run_id}")
-    checkpoint_dir.mkdir(parents=True, exist_ok=True)
-    checkpoint_dir = Path(f"samples/run_{args.run_id}")
-    checkpoint_dir.mkdir(parents=True, exist_ok=True)
+    run_dirs = [
+        Path(f"checkpoints/run_{args.run_id}"),
+        Path(f"samples/run_{args.run_id}"),
+    ]
+
+    for run_dir in run_dirs:
+        if not args.resume and run_dir.exists():
+            shutil.rmtree(run_dir)
+
+        run_dir.mkdir(parents=True, exist_ok=True)
 
 def setup_logs(args: Namespace) -> Logger:
     log_dir = Path("logs")
-    log_dir.mkdir(exist_ok=True)
-    log_file = log_dir / (f"train_{args.run_id}.log")
+    log_dir.mkdir(parents=True, exist_ok=True)
+
+    log_file = log_dir / f"train_{args.run_id}.log"
+
+    if not args.resume and log_file.exists():
+        log_file.unlink()
 
     logging.basicConfig(
         level=logging.INFO,
