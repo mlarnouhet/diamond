@@ -146,11 +146,11 @@ class EDMDiffusionModel(nn.Module):
         x = self.time_steps[0] * torch.randn_like(past_frames[:, 0, :, :, :])
         for i in range(self.n_sampling_steps):
             t_step = self.time_steps[i]
-            eps_i = self.S_noise * torch.randn_like(x) 
-            gamma_i = np.min([self.S_churn/self.n_sampling_steps, np.sqrt(2)-1]) if ((t_step >= self.S_tmin) and (t_step <= self.S_tmax)) else 0
-            noised_t_step = (1+gamma_i)*t_step
-            x_hat = x + np.sqrt(noised_t_step**2 - t_step**2) * eps_i
-            sigma_tau = torch.full((self.batch_size,), noised_t_step, device="cuda")
+            #eps_i = self.S_noise * torch.randn_like(x) 
+            #gamma_i = np.min([self.S_churn/self.n_sampling_steps, np.sqrt(2)-1]) if ((t_step >= self.S_tmin) and (t_step <= self.S_tmax)) else 0
+            noised_t_step = t_step #(1+gamma_i)*t_step
+            x_hat = x #+ np.sqrt(noised_t_step**2 - t_step**2) * eps_i
+            sigma_tau = torch.full((self.batch_size,), t_step, device="cuda")
             denoised_x_hat, _ = self.forward(x_hat, past_frames, sigma_tau, past_actions)
             d_i = (x_hat - denoised_x_hat) / noised_t_step
             x = x_hat + d_i * (self.time_steps[i+1] - noised_t_step)
