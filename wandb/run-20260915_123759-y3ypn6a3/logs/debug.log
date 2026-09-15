@@ -1,0 +1,7 @@
+2026-09-15 12:37:59,864 INFO    MainThread:9514 [wandb_init.py:setup_run_log_directory():739] Logging user logs to /home/ubuntu/diamond/wandb/run-20260915_123759-y3ypn6a3/logs/debug.log
+2026-09-15 12:37:59,864 INFO    MainThread:9514 [wandb_init.py:setup_run_log_directory():740] Logging internal logs to /home/ubuntu/diamond/wandb/run-20260915_123759-y3ypn6a3/logs/debug-internal.log
+2026-09-15 12:37:59,864 INFO    MainThread:9514 [wandb_init.py:init():783] calling init triggers
+2026-09-15 12:37:59,864 INFO    MainThread:9514 [wandb_init.py:init():788] wandb.init called with sweep_config: {}
+config: {'seed': 42, 'task_name': 'pong', 'run_id': 1, 'env_id': 'ALE/Pong-v5', 'n_epochs': 901, 'batch_size': 32, 'env_steps': 100, 'train_steps': 100, 'L': 4, 'action_space_dim': 6, 'burn_in_len': 4, 'hidden_dim': 512, 'im_horizon': 4, 'n_frame_skip': 4, 'n_sampling_steps': 3, 'setup_wandb': True, 'max_noop': 30, 'lbda': 0.95, 'gamma': 0.985, 'entropy_weight': 0.001, 'resume': True, 'save_interval': 5, 'lr': 0.0001, 'eps': 1e-08, 'wd': 0.01, 'enable_tf32': True, 'enable_mixed_precision': True, 'debug': True, 'hf_repo_id': 'Marcorico/diamond', 'epoch_to_load': 5, 'action_dim': np.int64(6), '_wandb': {}}
+2026-09-15 12:37:59,864 INFO    MainThread:9514 [wandb_init.py:init():831] starting backend
+2026-09-15 12:37:59,864 INFO    MainThread:9514 [wandb_init.py:init():846] sending inform_init request

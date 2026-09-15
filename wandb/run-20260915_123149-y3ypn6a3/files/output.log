@@ -1,0 +1,182 @@
+2026-09-15 12:31:50,586 | INFO | seed: 42
+2026-09-15 12:31:50,587 | INFO | task_name: pong
+2026-09-15 12:31:50,587 | INFO | run_id: 1
+2026-09-15 12:31:50,587 | INFO | env_id: ALE/Pong-v5
+2026-09-15 12:31:50,587 | INFO | n_epochs: 901
+2026-09-15 12:31:50,587 | INFO | batch_size: 32
+2026-09-15 12:31:50,588 | INFO | env_steps: 100
+2026-09-15 12:31:50,588 | INFO | train_steps: 100
+2026-09-15 12:31:50,588 | INFO | L: 4
+2026-09-15 12:31:50,589 | INFO | action_space_dim: 6
+2026-09-15 12:31:50,589 | INFO | burn_in_len: 4
+2026-09-15 12:31:50,589 | INFO | hidden_dim: 512
+2026-09-15 12:31:50,589 | INFO | im_horizon: 4
+2026-09-15 12:31:50,590 | INFO | n_frame_skip: 4
+2026-09-15 12:31:50,590 | INFO | n_sampling_steps: 3
+2026-09-15 12:31:50,590 | INFO | setup_wandb: True
+2026-09-15 12:31:50,590 | INFO | max_noop: 30
+2026-09-15 12:31:50,590 | INFO | lbda: 0.95
+2026-09-15 12:31:50,591 | INFO | gamma: 0.985
+2026-09-15 12:31:50,591 | INFO | entropy_weight: 0.001
+2026-09-15 12:31:50,591 | INFO | resume: False
+2026-09-15 12:31:50,591 | INFO | save_interval: 5
+2026-09-15 12:31:50,591 | INFO | lr: 0.0001
+2026-09-15 12:31:50,592 | INFO | eps: 1e-08
+2026-09-15 12:31:50,592 | INFO | wd: 0.01
+2026-09-15 12:31:50,592 | INFO | enable_tf32: True
+2026-09-15 12:31:50,592 | INFO | enable_mixed_precision: True
+2026-09-15 12:31:50,592 | INFO | debug: True
+2026-09-15 12:31:50,592 | INFO | hf_repo_id: Marcorico/diamond
+2026-09-15 12:31:50,592 | INFO | epoch_to_load: 0
+2026-09-15 12:31:50,592 | INFO | action_dim: 6
+Collecting experience: 100%|█████████████████████████████████████████████████| 100/100 [00:00<00:00, 110.89it/s]
+Training diffusion model: 100%|███████████████████████████████████████████████| 100/100 [00:04<00:00, 21.64it/s]
+Training reward model: 100%|██████████████████████████████████████████████████| 100/100 [00:06<00:00, 14.51it/s]
+Training actor critic: 100%|██████████████████████████████████████████████████| 100/100 [00:17<00:00,  5.74it/s]
+2026-09-15 12:32:20,441 | INFO | Epoch 1 metrics:█████████████████████████████| 100/100 [00:17<00:00,  5.74it/s]
+2026-09-15 12:32:20,442 | INFO | diffusion_loss: 0.48656880497932437
+2026-09-15 12:32:20,442 | INFO | reward_loss: 0.585218436717987
+2026-09-15 12:32:20,442 | INFO | critic_loss: 0.04383384407497942
+2026-09-15 12:32:20,442 | INFO | policy_loss: -0.005061780486721545
+2026-09-15 12:32:20,442 | INFO | entropy_loss: -0.0062592520238831635
+2026-09-15 12:32:20,443 | INFO | diffusion_grad_norm: 8.575688183307648
+2026-09-15 12:32:20,443 | INFO | reward_grad_norm: 22.62989044189453
+2026-09-15 12:32:20,443 | INFO | actor_critic_grad_norm: 1.694651871919632
+2026-09-15 12:32:20,443 | INFO | gpu/memory_allocated_gb: (0.12649917602539062,)
+2026-09-15 12:32:20,444 | INFO | gpu/memory_reserved_gb: (1.099609375,)
+2026-09-15 12:32:20,444 | INFO | gpu/max_memory_allocated_gb: (0.9489011764526367,)
+2026-09-15 12:32:20,444 | INFO | gpu/max_memory_reserved_gb: (1.099609375,)
+Collecting experience: 100%|█████████████████████████████████████████████████| 100/100 [00:00<00:00, 277.71it/s]
+Training diffusion model: 100%|███████████████████████████████████████████████| 100/100 [00:03<00:00, 26.71it/s]
+Training reward model: 100%|██████████████████████████████████████████████████| 100/100 [00:06<00:00, 14.43it/s]
+Training actor critic: 100%|██████████████████████████████████████████████████| 100/100 [00:18<00:00,  5.50it/s]
+2026-09-15 12:32:50,674 | INFO | Epoch 2 metrics:█████████████████████████████| 100/100 [00:18<00:00,  5.61it/s]
+2026-09-15 12:32:50,675 | INFO | diffusion_loss: 0.18956220835447313
+2026-09-15 12:32:50,675 | INFO | reward_loss: 0.18665374472737312
+2026-09-15 12:32:50,675 | INFO | critic_loss: 0.1684725937258918
+2026-09-15 12:32:50,676 | INFO | policy_loss: -0.01075984372291714
+2026-09-15 12:32:50,676 | INFO | entropy_loss: -0.004167262449627742
+2026-09-15 12:32:50,676 | INFO | diffusion_grad_norm: 0.8023191094398499
+2026-09-15 12:32:50,676 | INFO | reward_grad_norm: 0.750030905008316
+2026-09-15 12:32:50,677 | INFO | actor_critic_grad_norm: 3.291432023048401
+2026-09-15 12:32:50,677 | INFO | gpu/memory_allocated_gb: (0.12698745727539062,)
+2026-09-15 12:32:50,677 | INFO | gpu/memory_reserved_gb: (1.099609375,)
+2026-09-15 12:32:50,678 | INFO | gpu/max_memory_allocated_gb: (1.009474277496338,)
+2026-09-15 12:32:50,678 | INFO | gpu/max_memory_reserved_gb: (1.099609375,)
+Collecting experience: 100%|█████████████████████████████████████████████████| 100/100 [00:00<00:00, 276.47it/s]
+Training diffusion model: 100%|███████████████████████████████████████████████| 100/100 [00:03<00:00, 26.43it/s]
+Training reward model: 100%|██████████████████████████████████████████████████| 100/100 [00:07<00:00, 14.28it/s]
+Training actor critic: 100%|██████████████████████████████████████████████████| 100/100 [00:17<00:00,  5.70it/s]
+2026-09-15 12:33:19,371 | INFO | Epoch 3 metrics:█████████████████████████████| 100/100 [00:17<00:00,  5.68it/s]
+2026-09-15 12:33:19,371 | INFO | diffusion_loss: 0.08016127333045006
+2026-09-15 12:33:19,372 | INFO | reward_loss: 0.16084373548626898
+2026-09-15 12:33:19,372 | INFO | critic_loss: 0.05728775176765339
+2026-09-15 12:33:19,372 | INFO | policy_loss: -0.007983581663283985
+2026-09-15 12:33:19,372 | INFO | entropy_loss: -0.001832352130440995
+2026-09-15 12:33:19,373 | INFO | diffusion_grad_norm: 1.2693438827991486
+2026-09-15 12:33:19,373 | INFO | reward_grad_norm: 0.89847731590271
+2026-09-15 12:33:19,373 | INFO | actor_critic_grad_norm: 2.3909376561641693
+2026-09-15 12:33:19,374 | INFO | gpu/memory_allocated_gb: (0.12649917602539062,)
+2026-09-15 12:33:19,374 | INFO | gpu/memory_reserved_gb: (1.1015625,)
+2026-09-15 12:33:19,374 | INFO | gpu/max_memory_allocated_gb: (1.010450839996338,)
+2026-09-15 12:33:19,374 | INFO | gpu/max_memory_reserved_gb: (1.1015625,)
+Collecting experience: 100%|█████████████████████████████████████████████████| 100/100 [00:00<00:00, 196.05it/s]
+Training diffusion model: 100%|███████████████████████████████████████████████| 100/100 [00:03<00:00, 26.83it/s]
+Training reward model: 100%|██████████████████████████████████████████████████| 100/100 [00:06<00:00, 14.65it/s]
+Training actor critic: 100%|██████████████████████████████████████████████████| 100/100 [00:17<00:00,  5.60it/s]
+2026-09-15 12:33:48,287 | INFO | Epoch 4 metrics:█████████████████████████████| 100/100 [00:17<00:00,  5.70it/s]
+2026-09-15 12:33:48,287 | INFO | diffusion_loss: 0.0492624837346375
+2026-09-15 12:33:48,288 | INFO | reward_loss: 0.10235335096716881
+2026-09-15 12:33:48,288 | INFO | critic_loss: 0.032655612551752713
+2026-09-15 12:33:48,288 | INFO | policy_loss: -0.002476876758155413
+2026-09-15 12:33:48,288 | INFO | entropy_loss: -0.0022493844246491788
+2026-09-15 12:33:48,288 | INFO | diffusion_grad_norm: 1.1573834419250488
+2026-09-15 12:33:48,288 | INFO | reward_grad_norm: 1.0076028406620026
+2026-09-15 12:33:48,288 | INFO | actor_critic_grad_norm: 1.6749473810195923
+2026-09-15 12:33:48,288 | INFO | gpu/memory_allocated_gb: (0.12649917602539062,)
+2026-09-15 12:33:48,288 | INFO | gpu/memory_reserved_gb: (1.1015625,)
+2026-09-15 12:33:48,289 | INFO | gpu/max_memory_allocated_gb: (1.010450839996338,)
+2026-09-15 12:33:48,289 | INFO | gpu/max_memory_reserved_gb: (1.1015625,)
+Collecting experience: 100%|█████████████████████████████████████████████████| 100/100 [00:00<00:00, 145.84it/s]
+Training diffusion model: 100%|███████████████████████████████████████████████| 100/100 [00:03<00:00, 26.87it/s]
+Training reward model: 100%|██████████████████████████████████████████████████| 100/100 [00:06<00:00, 14.49it/s]
+Training actor critic: 100%|██████████████████████████████████████████████████| 100/100 [00:17<00:00,  5.62it/s]
+2026-09-15 12:34:17,409 | INFO | Epoch 5 metrics:█████████████████████████████| 100/100 [00:17<00:00,  5.56it/s]
+2026-09-15 12:34:17,410 | INFO | diffusion_loss: 0.03630869405344129
+2026-09-15 12:34:17,410 | INFO | reward_loss: 0.026207076609134673
+2026-09-15 12:34:17,410 | INFO | critic_loss: 0.023040306565526407
+2026-09-15 12:34:17,410 | INFO | policy_loss: 0.004333167231525294
+2026-09-15 12:34:17,411 | INFO | entropy_loss: -0.0036114129121415316
+2026-09-15 12:34:17,411 | INFO | diffusion_grad_norm: 1.6756837368011475
+2026-09-15 12:34:17,411 | INFO | reward_grad_norm: 0.4036039635539055
+2026-09-15 12:34:17,411 | INFO | actor_critic_grad_norm: 0.17568344622850418
+2026-09-15 12:34:17,411 | INFO | gpu/memory_allocated_gb: (0.12649917602539062,)
+2026-09-15 12:34:17,411 | INFO | gpu/memory_reserved_gb: (1.1015625,)
+2026-09-15 12:34:17,411 | INFO | gpu/max_memory_allocated_gb: (1.010450839996338,)
+2026-09-15 12:34:17,411 | INFO | gpu/max_memory_reserved_gb: (1.1015625,)
+2026-09-15 12:34:17,412 | INFO | Saving checkpoint for run 1 on env ALE/Pong-v5 at epoch 5
+2026-09-15 12:34:17,580 | INFO | Saved checkpoint checkpoints/run_1/checkpoint_epoch_5/models.pt and dataset checkpoints/run_1/checkpoint_epoch_5/dataset.pt at epoch 5
+2026-09-15 12:34:17,685 | INFO | HTTP Request: POST https://huggingface.co/api/repos/create "HTTP/1.1 409 Conflict"
+2026-09-15 12:34:17,786 | INFO | HTTP Request: POST https://huggingface.co/api/models/Marcorico/diamond/preupload/main "HTTP/1.1 200 OK"
+Processing Files (1 / 1)      : 100%|██████████████████████████████████████████████| 84.5MB / 84.5MB, 7.17MB/s  
+New Data Upload               : 100%|██████████████████████████████████████████████| 84.5MB / 84.5MB, 7.17MB/s  
+  ...ckpoint_epoch_5/models.pt: 100%|██████████████████████████████████████████████| 84.5MB / 84.5MB            
+2026-09-15 12:34:21,031 | INFO | HTTP Request: POST https://huggingface.co/api/models/Marcorico/diamond/commit/main "HTTP/1.1 200 OK"
+2026-09-15 12:34:21,110 | INFO | HTTP Request: POST https://huggingface.co/api/models/Marcorico/diamond/preupload/main "HTTP/1.1 200 OK"
+Processing Files (1 / 1)      : 100%|██████████████████████████████████████████████| 6.15MB / 6.15MB,  599kB/s  
+New Data Upload               : 100%|██████████████████████████████████████████████| 6.15MB / 6.15MB,  599kB/s  
+  ...kpoint_epoch_5/dataset.pt: 100%|██████████████████████████████████████████████| 6.15MB / 6.15MB
+2026-09-15 12:34:21,954 | INFO | HTTP Request: POST https://huggingface.co/api/models/Marcorico/diamond/commit/main "HTTP/1.1 200 OK"
+Collecting experience: 100%|█████████████████████████████████████████████████| 100/100 [00:00<00:00, 129.71it/s]
+Training diffusion model:  35%|████████████████▊                               | 35/100 [00:01<00:02, 25.18it/s]
+Training:   1%|▎                                                              | 5/900 [02:33<7:38:00, 30.70s/it]
+Traceback (most recent call last):
+  File "/home/ubuntu/diamond/main.py", line 51, in <module>
+    main(args)
+  File "/home/ubuntu/diamond/main.py", line 14, in main
+    runner.run()
+  File "/home/ubuntu/diamond/runner.py", line 82, in run
+    self._update_diffusion_model(log_grad_norm = ((i % 50) == 0))
+  File "/home/ubuntu/diamond/runner.py", line 153, in _update_diffusion_model
+    prediction, c_out = self.diffusion_model(noised_target, past_frames, sigma_tau, actions)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/diffusion.py", line 142, in forward
+    denoised_target = self.denoiser(c_in*noised_target, c_noise_embs, action_embs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/diffusion.py", line 110, in forward
+    x = self.bottleneck(x, c)
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/diffusion.py", line 56, in forward
+    x = self.conv2(x)
+        ^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/conv.py", line 543, in _conv_forward
+    return F.conv2d(
+           ^^^^^^^^^
+KeyboardInterrupt

@@ -1,0 +1,20 @@
+2026-09-15 13:03:55,835 INFO    MainThread:16812 [wandb_setup.py:_flush():81] Current SDK version is 0.29.0
+2026-09-15 13:03:55,835 INFO    MainThread:16812 [wandb_setup.py:_flush():81] Configure stats pid to 16812
+2026-09-15 13:03:55,835 INFO    MainThread:16812 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-09-15 13:03:55,835 INFO    MainThread:16812 [wandb_init.py:setup_run_log_directory():739] Logging user logs to /home/ubuntu/diamond/wandb/run-20260915_130355-l3wvt7gj/logs/debug.log
+2026-09-15 13:03:55,835 INFO    MainThread:16812 [wandb_init.py:setup_run_log_directory():740] Logging internal logs to /home/ubuntu/diamond/wandb/run-20260915_130355-l3wvt7gj/logs/debug-internal.log
+2026-09-15 13:03:55,836 INFO    MainThread:16812 [wandb_init.py:init():783] calling init triggers
+2026-09-15 13:03:55,836 INFO    MainThread:16812 [wandb_init.py:init():788] wandb.init called with sweep_config: {}
+config: {'seed': 42, 'task_name': 'pong', 'run_id': 1, 'env_id': 'ALE/Pong-v5', 'n_epochs': 901, 'batch_size': 32, 'env_steps': 100, 'train_steps': 100, 'L': 4, 'action_space_dim': 6, 'burn_in_len': 4, 'hidden_dim': 512, 'im_horizon': 4, 'n_frame_skip': 4, 'n_sampling_steps': 3, 'setup_wandb': True, 'max_noop': 30, 'lbda': 0.95, 'gamma': 0.985, 'entropy_weight': 0.001, 'resume': True, 'save_interval': 5, 'lr': 0.0001, 'eps': 1e-08, 'wd': 0.01, 'enable_tf32': True, 'enable_mixed_precision': True, 'debug': True, 'hf_repo_id': 'Marcorico/diamond', 'epoch_to_load': 10, 'action_dim': np.int64(6), '_wandb': {}}
+2026-09-15 13:03:55,836 INFO    MainThread:16812 [wandb_init.py:init():831] starting backend
+2026-09-15 13:03:55,836 INFO    MainThread:16812 [wandb_init.py:init():846] sending inform_init request
+2026-09-15 13:03:56,012 INFO    MainThread:16812 [wandb_init.py:init():851] backend started and connected
+2026-09-15 13:03:56,016 INFO    MainThread:16812 [wandb_init.py:init():921] updated telemetry
+2026-09-15 13:03:56,024 INFO    MainThread:16812 [wandb_init.py:init():944] communicating run to backend with 90.0 second timeout
+2026-09-15 13:03:56,625 INFO    MainThread:16812 [wandb_init.py:init():976] run resumed
+2026-09-15 13:03:56,899 INFO    MainThread:16812 [wandb_init.py:init():981] starting run threads in backend
+2026-09-15 13:03:57,090 INFO    MainThread:16812 [wandb_run.py:_console_start():2545] atexit reg
+2026-09-15 13:03:57,091 INFO    MainThread:16812 [wandb_run.py:_redirect():2395] redirect: wrap_raw
+2026-09-15 13:03:57,092 INFO    MainThread:16812 [wandb_run.py:_redirect():2464] Wrapping output streams.
+2026-09-15 13:03:57,092 INFO    MainThread:16812 [wandb_run.py:_redirect():2487] Redirects installed.
+2026-09-15 13:03:57,095 INFO    MainThread:16812 [wandb_init.py:init():1019] run started, returning control to user process

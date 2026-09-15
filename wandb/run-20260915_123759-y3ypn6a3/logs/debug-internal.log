@@ -1,0 +1,3 @@
+{"time":"2026-09-15T12:37:59.979165916Z","level":"INFO","msg":"wandb-core"}
+{"time":"2026-09-15T12:37:59.979590768Z","level":"INFO","msg":"stream: starting","core version":"0.29.0"}
+{"time":"2026-09-15T12:37:59.981464888Z","level":"INFO","msg":"stream: created new stream","id":"y3ypn6a3"}

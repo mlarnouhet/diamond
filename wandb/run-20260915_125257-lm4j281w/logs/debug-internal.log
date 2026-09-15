@@ -1,0 +1,17 @@
+{"time":"2026-09-15T12:52:57.367879823Z","level":"INFO","msg":"wandb-core"}
+{"time":"2026-09-15T12:52:57.368198743Z","level":"INFO","msg":"stream: starting","core version":"0.29.0"}
+{"time":"2026-09-15T12:52:57.471530597Z","level":"INFO","msg":"stream: created new stream","id":"lm4j281w"}
+{"time":"2026-09-15T12:52:57.471599147Z","level":"INFO","msg":"handler: started"}
+{"time":"2026-09-15T12:52:57.471688832Z","level":"INFO","msg":"stream: started"}
+{"time":"2026-09-15T12:52:57.471735121Z","level":"INFO","msg":"sender: started"}
+{"time":"2026-09-15T12:52:57.471728341Z","level":"INFO","msg":"writer: started","stream_id":"lm4j281w"}
+{"time":"2026-09-15T12:52:57.611679475Z","level":"ERROR","msg":"api: HTTP error","status":400,"method":"POST","url":"https://api.wandb.ai/graphql"}
+{"time":"2026-09-15T12:52:57.611801506Z","level":"ERROR","msg":"runupserter: failed to init run","error":"returned error 400: {\"data\":{\"upsertBucket\":null},\"errors\":[{\"message\":\"entity not specified, and viewer has no default entity\",\"path\":[\"upsertBucket\"]}]}"}
+{"time":"2026-09-15T12:53:02.461197294Z","level":"ERROR","msg":"sender: uploadConfigFile: runhandle: run not yet initialized"}
+{"time":"2026-09-15T12:53:02.46150679Z","level":"ERROR","msg":"runfiles: runhandle: run not yet initialized"}
+{"time":"2026-09-15T12:53:02.461932958Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2026-09-15T12:53:02.461949737Z","level":"INFO","msg":"stream: finishing up"}
+{"time":"2026-09-15T12:53:02.461955882Z","level":"INFO","msg":"handler: closed"}
+{"time":"2026-09-15T12:53:02.462000282Z","level":"INFO","msg":"sender: closed"}
+{"time":"2026-09-15T12:53:02.462010588Z","level":"INFO","msg":"stream: all finished"}
+{"time":"2026-09-15T12:53:02.966589385Z","level":"ERROR","msg":"stream: runURL: runhandle: run not yet initialized"}

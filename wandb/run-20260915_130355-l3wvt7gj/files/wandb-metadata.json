@@ -1,0 +1,40 @@
+{
+  "os":  "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
+  "python":  "CPython 3.11.16",
+  "startedAt":  "2026-09-15T13:03:55.832593Z",
+  "program":  "/home/ubuntu/diamond/main.py",
+  "codePath":  "main.py",
+  "codePathLocal":  "main.py",
+  "git":  {
+    "remote":  "https://github.com/mlarnouhet/diamond.git",
+    "commit":  "1db58dfb2260cabddbc25331e2a491077c6b0458"
+  },
+  "email":  "mlarnouhet@gmail.com",
+  "root":  "/home/ubuntu/diamond",
+  "host":  "0136-ict-prxmx50030",
+  "executable":  "/home/ubuntu/diamond/.venv/bin/python",
+  "cpu_count":  6,
+  "cpu_count_logical":  6,
+  "gpu":  "NVIDIA RTX A6000",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "269257277440",
+      "used":  "23618519040"
+    }
+  },
+  "memory":  {
+    "total":  "50611527680"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA RTX A6000",
+      "memoryTotal":  "51527024640",
+      "cudaCores":  10752,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-1a27a7ed-4256-207e-9c7f-8d5bec98e5fd"
+    }
+  ],
+  "cudaVersion":  "13.0",
+  "writerId":  "81bghafdz46fmspz2ahae39vx3phkxwo"
+}

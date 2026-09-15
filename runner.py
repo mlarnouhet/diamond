@@ -22,6 +22,7 @@ class Runner(nn.Module):
         super().__init__()
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.logger = logger
+        self.wandb_run = None
         self.wandb_run_id = ""
         self.run_id = args.run_id
         self.env_id = args.env_id
@@ -60,13 +61,13 @@ class Runner(nn.Module):
 
         if args.resume:
             self._load_checkpoint(args)
-            self.wandb_run_id = self._setup_wnb(args)
             logger.info(f"Resuming run {args.run_id} on env {args.env_id} at epoch {self.start_epoch}")
             for key, value in vars(args).items():
                 self.logger.info(f"{key}: {value}")
         else:
+            self.wandb_run = self._setup_wnb(args)
+            self.wandb_run_id = self.wandb_run.id
             logger.info(f"Starting run {args.run_id} on env {args.env_id}")
-            self.wandb_run_id = self._setup_wnb(args)
             for key, value in vars(args).items():
                 self.logger.info(f"{key}: {value}")
 
@@ -371,6 +372,9 @@ class Runner(nn.Module):
 
         self.dataset.load_dataset(dataset_dir)
         self.start_epoch = epoch + 1
+
+        self.wandb_run = self._setup_wnb(args)
+        self.wandb_run_id = self.wandb_run.id
         self.logger.info(f"Loaded checkpoint for run {self.run_id} on env {self.env_id} at epoch {epoch}")
 
     def _save_to_hf(self, epoch: int, checkpoint_dir: str, dataset_dir: str):
@@ -393,11 +397,12 @@ class Runner(nn.Module):
         upload_future_model.result()
         upload_future_data.result()
 
-    def _setup_wnb(self, args: Namespace) -> str:
+    def _setup_wnb(self, args: Namespace) -> wandb.Run | None:
         if args.setup_wandb:
             if args.resume:
                 run = wandb.init(
                 project=f"Diamond",
+                entity=os.getenv("WANDB_ENTITY"),
                 name=f"run__{args.task_name}_{args.run_id}",
                 id=self.wandb_run_id,
                 config=vars(args),
@@ -411,7 +416,11 @@ class Runner(nn.Module):
             )
             wandb.define_metric("epoch")
             wandb.define_metric("*", step_metric="epoch")
-            return run.id
+            return run
+        else:
+            return None
 
     def finish(self):
         self.env.close()
+        if self.wandb_run is not None:
+            self.run.finish()
