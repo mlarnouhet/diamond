@@ -87,13 +87,15 @@ class RewardEndNetwork(nn.Module):
         return reward, end, h, c
 
     def burn_in(self, x: torch.Tensor, actions: torch.Tensor, h: torch.Tensor, c: torch.Tensor) -> Tuple[torch.Tensor]:
+        batch_size = x.shape[0]
+        x = x.flatten(0, 1)
+        actions = actions.flatten(0, 1)
         actions_embs = self.action_embedding(actions)
+        for res_block in self.trunk:
+            x = res_block(x, actions_embs)
+        x = x.reshape(batch_size, self.burn_in_len, -1)
         for i in range(self.burn_in_len):
-            x_i = x[:, i, : , : , :]
-            for res_block in self.trunk:
-                x_i = res_block(x_i, actions_embs[:, i, :])
-            x_i = torch.flatten(x_i, start_dim=1)
-            h, c = self.lstm(x_i, (h, c))
+            h, c = self.lstm(x[:, i, :], (h, c))
         return h, c
 
     def _compute_sin_embeds(self, x: torch.Tensor) -> torch.Tensor:
@@ -175,10 +177,12 @@ class ActorCriticNetwork(nn.Module):
         return action_logits, value,  h, c
 
     def burn_in(self, x: torch.Tensor, h: torch.Tensor, c: torch.Tensor) -> Tuple[torch.Tensor]:
+        batch_size = x.shape[0]
+        x = x.flatten(0, 1)
+        x = self.trunk(x)
+        x = x.reshape(batch_size, self.burn_in_len, -1)
         for i in range(self.burn_in_len):
-            x_i = self.trunk(x[:, i, : , : , :])
-            x_i = torch.flatten(x_i, start_dim=1)
-            h, c = self.lstm(x_i, (h, c))
+            h, c = self.lstm(x[:, i, :], (h, c))
         return h, c
 
 
