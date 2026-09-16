@@ -56,6 +56,8 @@ class Runner(nn.Module):
         self.dataset = Dataset(args)
         self._collection_state = None
         self._collection_has_open_trajectory = False
+        self._trajectory_length = 0
+        self._trajectory_reward = 0.0
         self.mse_loss = nn.MSELoss()
         self.ce_loss = nn.CrossEntropyLoss()
         self.bce_loss = nn.BCEWithLogitsLoss()
@@ -126,6 +128,15 @@ class Runner(nn.Module):
                 "reward": reward,
                 "end": end
             }, end_of_traj=end_of_traj)
+
+            self._trajectory_length += 1
+            self._trajectory_reward += reward
+            if episode_done:
+                self.metrics.add_trajectory(
+                    self._trajectory_length, self._trajectory_reward
+                )
+                self._trajectory_length = 0
+                self._trajectory_reward = 0.0
 
             self._collection_state = (
                 None if episode_done else (next_observation, h.detach(), c.detach())

@@ -31,6 +31,9 @@ class Metrics():
         }
 
     def reset_metrics(self):
+        self._trajectory_count = 0
+        self._trajectory_length_sum = 0
+        self._trajectory_reward_sum = 0.0
         self.temp_metrics_dict = {
             "diffusion_loss": [],
             "reward_loss": [],
@@ -45,6 +48,12 @@ class Metrics():
             "gpu/max_memory_allocated_gb": 0,
             "gpu/max_memory_reserved_gb": 0
         }
+
+
+    def add_trajectory(self, length: int, total_reward: float):
+        self._trajectory_count += 1
+        self._trajectory_length_sum += length
+        self._trajectory_reward_sum += total_reward
 
     def add_metric(self, loss: torch.Tensor | None, key: str, model=None):
         if model is not None:
@@ -68,8 +77,19 @@ class Metrics():
                 for k in keys
             ])
             self.temp_metrics_dict.update(zip(keys, means.cpu().tolist()))
+
+        count = self._trajectory_count
+        self.temp_metrics_dict["trajectory/count"] = count
+        if count:
+            self.temp_metrics_dict["trajectory/length"] = (
+                self._trajectory_length_sum / count
+            )
+            self.temp_metrics_dict["trajectory/total_reward"] = (
+                self._trajectory_reward_sum / count
+            )
+
         for (k,v) in self.temp_metrics_dict.items():
-            self.metrics_dict[k].append(v)
+            self.metrics_dict.setdefault(k, []).append(v)
 
     def compute_perf_metrics(self):
         self.temp_metrics_dict["gpu/memory_allocated_gb"] = torch.cuda.memory_allocated() / 1024**3
