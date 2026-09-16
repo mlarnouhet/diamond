@@ -162,7 +162,7 @@ class ActorCriticNetwork(nn.Module):
             ResidualBlock(64, 64),
         )
         self.lstm = nn.LSTMCell(input_size=4*4*64, hidden_size=512)
-        self.action_head = nn.Linear(in_features=512, out_features=args.action_dim)
+        self.action_head = nn.Linear(in_features=512, out_features=args.action_space_dim)
         self.value_head = nn.Linear(in_features=512, out_features=1)
 
     def forward(self, x: torch.Tensor, h: torch.Tensor, c: torch.Tensor, compute_value: bool=False) -> Tuple[torch.Tensor | None]:

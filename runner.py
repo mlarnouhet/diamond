@@ -40,6 +40,7 @@ class Runner(nn.Module):
         self.entropy_weight = args.entropy_weight
         self.save_interval = args.save_interval
         self.hf_repo_id = args.hf_repo_id
+        self.log_every = args.log_every
 
         self.mixed_prec_dtype = torch.bfloat16 
         self.start_epoch = 1 if args.debug else 1
@@ -71,6 +72,8 @@ class Runner(nn.Module):
             for key, value in vars(args).items():
                 self.logger.info(f"{key}: {value}")
 
+        self.logger.info("Using device {self.device}")
+
     def run(self):
         for epoch in tqdm(range(self.start_epoch, self.n_epochs), desc="Training"):
             collect_steps = 10000 if (epoch == 0) else self.env_steps
@@ -86,9 +89,10 @@ class Runner(nn.Module):
             for i in tqdm(range(ac_steps), desc="Training actor critic"):
                 self._update_actor_critic(log_grad_norm = ((i % 50) == 0))
 
-            self.metrics.compute_perf_metrics()
-            self.metrics.update_metrics()
-            self.metrics.log_metrics(epoch)
+            if ((epoch % self.log_every) == 0):
+                self.metrics.compute_perf_metrics()
+                self.metrics.update_metrics()
+                self.metrics.log_metrics(epoch)
             
             if ((epoch % self.save_interval) == 0) and (epoch > self.start_epoch):
                 self._save_checkpoint(epoch)
@@ -155,7 +159,7 @@ class Runner(nn.Module):
             loss = self.mse_loss(prediction / c_out, target / c_out)
         self.diffusion_optimizer.zero_grad()
         loss.backward()
-        self.metrics.add_metric(loss.item(), "diffusion", self.diffusion_model if log_grad_norm else None)
+        self.metrics.add_metric(loss, "diffusion", self.diffusion_model if log_grad_norm else None)
         self.diffusion_optimizer.step()
 
     def _update_reward_end_model(self, log_grad_norm = False):
@@ -174,7 +178,7 @@ class Runner(nn.Module):
 
         self.reward_optimizer.zero_grad()
         loss.backward()
-        self.metrics.add_metric(loss.item(), "reward", self.reward_end_model if log_grad_norm else None)
+        self.metrics.add_metric(loss, "reward", self.reward_end_model if log_grad_norm else None)
         self.reward_optimizer.step()
 
     def _update_actor_critic(self, log_grad_norm = False):
@@ -245,9 +249,9 @@ class Runner(nn.Module):
         self.actor_critic_optimizer.zero_grad()
         loss.backward()
         self.metrics.add_metric(None, "actor_critic", self.actor_critic_model if log_grad_norm else None)
-        self.metrics.add_metric(policy_loss.item(), "policy")
-        self.metrics.add_metric(critic_loss.item(), "critic")
-        self.metrics.add_metric(entropy_loss.item(), "entropy")
+        self.metrics.add_metric(policy_loss, "policy")
+        self.metrics.add_metric(critic_loss, "critic")
+        self.metrics.add_metric(entropy_loss, "entropy")
         self.actor_critic_optimizer.step()
 
     def _process_batch(self, batch: torch.Tensor, mode: str | None = None) -> Tuple[torch.Tensor | None]:
@@ -276,16 +280,17 @@ class Runner(nn.Module):
     def _setup_env(self, args: Namespace):
         gym.register_envs(ale_py)
         self.env = gym.make(args.env_id, frameskip=1)
+        self.env.reset(seed=args.seed)
 
     def _init_models(self, args: Namespace):
-        args.action_dim = self.env.action_space.n
+        assert args.action_space_dim == self.env.action_space.n, f"action space dim is {args.action_space_dim} =! {self.env.action_space.n}"
         self.actor_critic_model = ActorCriticNetwork(args)
         self.reward_end_model = RewardEndNetwork(args)
         self.diffusion_model = EDMDiffusionModel(args)
 
-        self.actor_critic_model.cuda()
-        self.reward_end_model.cuda()
-        self.diffusion_model.cuda()
+        self.actor_critic_model.to(self.device)
+        self.reward_end_model.to(self.device)
+        self.diffusion_model.to(self.device)
 
         if not args.debug:
             self._compile_models()

@@ -46,12 +46,12 @@ class Metrics():
             "gpu/max_memory_reserved_gb": 0
         }
 
-    def add_metric(self, loss: float | None, key: str, model=None):
+    def add_metric(self, loss: torch.Tensor | None, key: str, model=None):
         if model is not None:
             grad_norm = torch.nn.utils.get_total_norm([p.grad for p in model.parameters() if p.grad is not None], norm_type=2.0)
-            self.temp_metrics_dict[key + "_grad_norm"].append(grad_norm.item())
+            self.temp_metrics_dict[key + "_grad_norm"].append(grad_norm.detach())
         if loss is not  None:
-            self.temp_metrics_dict[key + "_loss"].append(loss)
+            self.temp_metrics_dict[key + "_loss"].append(loss.detach())
 
     def log_metrics(self, epoch: int):
         self.logger.info(f"Epoch {epoch} metrics:")
@@ -61,15 +61,21 @@ class Metrics():
             wandb.log({"epoch": epoch, **self.temp_metrics_dict})
 
     def update_metrics(self):
-        self.temp_metrics_dict = {k: sum(v)/len(v) if isinstance(v, List) else v for (k,v) in self.temp_metrics_dict.items()}
+        keys = [k for k, v in self.temp_metrics_dict.items() if isinstance(v, list) and v]
+        if keys:
+            means = torch.stack([
+                torch.stack(self.temp_metrics_dict[k]).mean(dtype=torch.float32)
+                for k in keys
+            ])
+            self.temp_metrics_dict.update(zip(keys, means.cpu().tolist()))
         for (k,v) in self.temp_metrics_dict.items():
             self.metrics_dict[k].append(v)
 
     def compute_perf_metrics(self):
-        self.temp_metrics_dict["gpu/memory_allocated_gb"] = torch.cuda.memory_allocated() / 1024**3,
-        self.temp_metrics_dict["gpu/memory_reserved_gb"] = torch.cuda.memory_reserved() / 1024**3,
-        self.temp_metrics_dict["gpu/max_memory_allocated_gb"] = torch.cuda.max_memory_allocated() / 1024**3,
-        self.temp_metrics_dict["gpu/max_memory_reserved_gb"] = torch.cuda.max_memory_reserved() / 1024**3,
+        self.temp_metrics_dict["gpu/memory_allocated_gb"] = torch.cuda.memory_allocated() / 1024**3
+        self.temp_metrics_dict["gpu/memory_reserved_gb"] = torch.cuda.memory_reserved() / 1024**3
+        self.temp_metrics_dict["gpu/max_memory_allocated_gb"] = torch.cuda.max_memory_allocated() / 1024**3
+        self.temp_metrics_dict["gpu/max_memory_reserved_gb"] = torch.cuda.max_memory_reserved() / 1024**3
         
 
 def set_seed(seed: int) -> None:
