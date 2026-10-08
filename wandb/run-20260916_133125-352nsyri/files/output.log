@@ -1,0 +1,390 @@
+2026-09-16 13:31:26,675 | INFO | Starting run 1 on env ALE/Pong-v5
+2026-09-16 13:31:26,675 | INFO | seed: 42
+2026-09-16 13:31:26,676 | INFO | task_name: pong
+2026-09-16 13:31:26,676 | INFO | run_id: 1
+2026-09-16 13:31:26,677 | INFO | env_id: ALE/Pong-v5
+2026-09-16 13:31:26,677 | INFO | n_epochs: 901
+2026-09-16 13:31:26,678 | INFO | batch_size: 32
+2026-09-16 13:31:26,678 | INFO | env_steps: 100
+2026-09-16 13:31:26,679 | INFO | train_steps: 400
+2026-09-16 13:31:26,679 | INFO | L: 4
+2026-09-16 13:31:26,680 | INFO | action_space_dim: 6
+2026-09-16 13:31:26,680 | INFO | burn_in_len: 4
+2026-09-16 13:31:26,680 | INFO | im_horizon: 15
+2026-09-16 13:31:26,681 | INFO | n_frame_skip: 4
+2026-09-16 13:31:26,681 | INFO | n_sampling_steps: 3
+2026-09-16 13:31:26,682 | INFO | setup_wandb: True
+2026-09-16 13:31:26,682 | INFO | max_noop: 30
+2026-09-16 13:31:26,683 | INFO | lbda: 0.95
+2026-09-16 13:31:26,683 | INFO | gamma: 0.985
+2026-09-16 13:31:26,684 | INFO | entropy_weight: 0.001
+2026-09-16 13:31:26,684 | INFO | resume: False
+2026-09-16 13:31:26,685 | INFO | save_interval: 50
+2026-09-16 13:31:26,686 | INFO | lr: 0.0001
+2026-09-16 13:31:26,686 | INFO | eps: 1e-08
+2026-09-16 13:31:26,687 | INFO | wd: 0.01
+2026-09-16 13:31:26,687 | INFO | enable_tf32: True
+2026-09-16 13:31:26,688 | INFO | debug: False
+2026-09-16 13:31:26,688 | INFO | hf_repo_id: Marcorico/diamond
+2026-09-16 13:31:26,688 | INFO | epoch_to_load: 0
+2026-09-16 13:31:26,689 | INFO | log_every: 10
+2026-09-16 13:31:26,689 | INFO | Using device {self.device}
+Training:   0%|                                                                                | 0/900 [00:00<?, ?it/s]W0916 13:31:29.568000 579 .venv/lib/python3.11/site-packages/torch/_inductor/utils.py:1436] [0/0] Not enough SMs to use max_autotune_gemm mode
+/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_inductor/compile_fx.py:2509: UserWarning: NVIDIA GeForce GTX 1660 Ti does not support bfloat16 compilation natively, skipping
+  warnings.warn(
+Collecting experience:   0%|                                                                   | 0/100 [00:10<?, ?it/s]
+Training:   0%|                                                                                | 0/900 [00:10<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/mlarn/diamond/main.py", line 50, in <module>
+    main(args)
+  File "/home/mlarn/diamond/main.py", line 14, in main
+    runner.run()
+  File "/home/mlarn/diamond/runner.py", line 86, in run
+    self._collect_experience(collect_steps)
+  File "/home/mlarn/diamond/runner.py", line 118, in _collect_experience
+    logits, _, h, c = self.actor_critic_model(observation, h, c)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1771, in _wrapped_call_impl
+    return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 736, in compile_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/models.py", line 169, in forward
+    x = self.trunk(x)
+        ^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/container.py", line 244, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 1495, in __call__
+    return self._torchdynamo_orig_callable(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 1272, in __call__
+    result = self._inner_convert(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 629, in __call__
+    return _compile(
+           ^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 1111, in _compile
+    guarded_code = compile_inner(code, one_graph, hooks, transform)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_utils_internal.py", line 97, in wrapper_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 793, in compile_inner
+    return _compile_inner(code, one_graph, hooks, transform)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 832, in _compile_inner
+    out_code = transform_code_object(code, transform)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/bytecode_transformation.py", line 1424, in transform_code_object
+    transformations(instructions, code_options)
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 267, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 753, in transform
+    tracer.run()
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3497, in run
+    super().run()
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1363, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 1267, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3672, in RETURN_VALUE
+    self._return(inst)
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 3653, in _return
+    all_stack_locals_metadata = self.output.compile_subgraph(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1422, in compile_subgraph
+    self.compile_and_call_fx_graph(tx, pass2.graph_output_vars(), root)
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1696, in compile_and_call_fx_graph
+    compiled_fn = self.call_user_compiler(gm, self.example_inputs())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1811, in call_user_compiler
+    return self._call_user_compiler(gm, example_inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/output_graph.py", line 1846, in _call_user_compiler
+    compiled_fn = compiler_fn(gm, example_inputs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/repro/after_dynamo.py", line 150, in __call__
+    compiled_gm = compiler_fn(gm, example_inputs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/__init__.py", line 2380, in __call__
+    return compile_fx(model_, inputs_, config_patches=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 2418, in compile_fx
+    return aot_autograd(
+           ^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/backends/common.py", line 109, in __call__
+    cg = aot_module_simplified(gm, example_inputs, **self.kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1199, in aot_module_simplified
+    compiled_fn = AOTAutogradCache.load(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py", line 1140, in load
+    compiled_fn = dispatch_and_compile()
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1184, in dispatch_and_compile
+    compiled_fn, _ = create_aot_dispatcher_function(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 576, in create_aot_dispatcher_function
+    return _create_aot_dispatcher_function(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 836, in _create_aot_dispatcher_function
+    compiled_fn, fw_metadata = compiler_fn(
+                               ^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/jit_compile_runtime_wrappers.py", line 182, in aot_dispatch_base
+    fw_module, updated_flat_args, maybe_subclass_meta = aot_dispatch_base_graph(  # type: ignore[misc]
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py", line 153, in aot_dispatch_base_graph
+    fw_module = _create_graph(
+                ^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py", line 55, in _create_graph
+    fx_g = make_fx(
+           ^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 2318, in wrapped
+    return make_fx_tracer.trace(f, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 2250, in trace
+    return self._trace_inner(f, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 2221, in _trace_inner
+    t = dispatch_trace(
+        ^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_compile.py", line 53, in inner
+    return disable_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 929, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 1254, in dispatch_trace
+    graph = tracer.trace(root, concrete_args)  # type: ignore[arg-type]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 929, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/_symbolic_trace.py", line 850, in trace
+    (self.create_arg(fn(*args)),),
+                     ^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 1312, in wrapped
+    out = f(*tensors)  # type:ignore[call-arg]
+          ^^^^^^^^^^^
+  File "<string>", line 1, in <lambda>
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 720, in inner_fn
+    outs = fn(*args)
+           ^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 419, in _functionalized_f_helper
+    f_outs = fn(*f_args)
+             ^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 81, in inner_fn
+    outs = fn(*args)
+           ^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 902, in functional_call
+    out = PropagateUnbackedSymInts(mod).run(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/interpreter.py", line 173, in run
+    self.env[node] = self.run_node(node)
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/symbolic_shapes.py", line 7858, in run_node
+    result = super().run_node(n)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/interpreter.py", line 242, in run_node
+    return getattr(self, n.op)(n.target, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/interpreter.py", line 322, in call_function
+    return target(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_jit_internal.py", line 627, in fn
+    return if_false(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/nn/functional.py", line 814, in _max_pool2d
+    return handle_torch_function(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/overrides.py", line 1725, in handle_torch_function
+    result = mode.__torch_function__(public_api, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 1360, in __torch_function__
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_jit_internal.py", line 627, in fn
+    return if_false(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/nn/functional.py", line 827, in _max_pool2d
+    return torch.max_pool2d(input, kernel_size, stride, padding, dilation, ceil_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/functional_tensor.py", line 511, in __torch_dispatch__
+    outs_unwrapped = func._op_dk(
+                     ^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/utils/_stats.py", line 28, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 1462, in __torch_dispatch__
+    return proxy_call(self, func, self.pre_dispatch, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 787, in proxy_call
+    r = maybe_handle_decomp(proxy_mode, func, args, kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 2390, in maybe_handle_decomp
+    out = CURRENT_DECOMPOSITION_TABLE[op](*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_inductor/decomposition.py", line 1078, in max_pool2d_with_indices
+    return _max_pool_with_indices(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_inductor/decomposition.py", line 1050, in _max_pool_with_indices
+    vals, offsets = prims._low_memory_max_pool_with_offsets(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_ops.py", line 1243, in __call__
+    return self._op(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/utils/_stats.py", line 28, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 1462, in __torch_dispatch__
+    return proxy_call(self, func, self.pre_dispatch, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/proxy_tensor.py", line 914, in proxy_call
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_ops.py", line 829, in __call__
+    return self._op(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/utils/_stats.py", line 28, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 1352, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 2058, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 1487, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 2623, in _dispatch_impl
+    func.prim_meta_impl(*args, **kwargs)
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_inductor/inductor_prims.py", line 30, in meta
+    return tuple(_prims.TensorMeta(o) for o in impl_aten(*args, **kwargs))
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_inductor/inductor_prims.py", line 181, in _low_memory_max_pool_with_offsets_aten
+    h_inc = (idhw[d] - hbase) // dilation[d]
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_tensor.py", line 39, in wrapped
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_tensor.py", line 1138, in __floordiv__
+    return torch.floor_divide(self, other)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/utils/_stats.py", line 28, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 1352, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 2058, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 1487, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 2601, in _dispatch_impl
+    decomposition_table[func](*args, **kwargs)
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_prims_common/wrappers.py", line 309, in _fn
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_decomp/decompositions.py", line 5063, in floor_divide
+    return torch.div(self, other, rounding_mode="floor")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/utils/_stats.py", line 28, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 1352, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 2058, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 1487, in _cached_dispatch_impl
+    output = self._dispatch_impl(func, types, args, kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 2601, in _dispatch_impl
+    decomposition_table[func](*args, **kwargs)
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_prims_common/wrappers.py", line 309, in _fn
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_refs/__init__.py", line 1219, in div
+    return floor_divide(a, b)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_prims_common/wrappers.py", line 309, in _fn
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_compile.py", line 53, in inner
+    return disable_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 929, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_prims_common/wrappers.py", line 149, in _fn
+    result = fn(**bound.arguments)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_refs/__init__.py", line 1088, in _ref
+    output = prim(a, b)
+             ^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_refs/__init__.py", line 1345, in floor_divide
+    return _floor_divide_integer(a, b)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_refs/__init__.py", line 1357, in _floor_divide_integer
+    offset = (torch.signbit(a) != torch.signbit(b)).logical_and(torch.fmod(a, b) != 0)
+                                                                ^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/utils/_stats.py", line 28, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 1352, in __torch_dispatch__
+    return self.dispatch(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 2058, in dispatch
+    return self._cached_dispatch_impl(func, types, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 1477, in _cached_dispatch_impl
+    output = self._output_from_cache_entry(state, entry, key, func, args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 1979, in _output_from_cache_entry
+    return self._get_output_tensor_from_cache_entry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/_subclasses/fake_tensor.py", line 1934, in _get_output_tensor_from_cache_entry
+    empty = torch.empty_strided(
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/sym_node.py", line 607, in guard_or_false
+    return guard_or_false(SymBool(self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/symbolic_shapes.py", line 1391, in guard_or_false
+    return _guard_or(a, False)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/symbolic_shapes.py", line 1381, in _guard_or
+    r = sym_node.shape_env.evaluate_sym_node(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/symbolic_shapes.py", line 7224, in evaluate_sym_node
+    sym_node.expr,
+    ^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/sym_node.py", line 189, in expr
+    return self.shape_env.replace(self._expr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mlarn/diamond/.venv/lib/python3.11/site-packages/torch/fx/experimental/symbolic_shapes.py", line 2539, in wrapper
+    return fn_cache(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

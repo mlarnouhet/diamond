@@ -1,0 +1,33 @@
+2026-09-16 13:31:26,675 | INFO | Starting run 1 on env ALE/Pong-v5
+2026-09-16 13:31:26,675 | INFO | seed: 42
+2026-09-16 13:31:26,676 | INFO | task_name: pong
+2026-09-16 13:31:26,676 | INFO | run_id: 1
+2026-09-16 13:31:26,677 | INFO | env_id: ALE/Pong-v5
+2026-09-16 13:31:26,677 | INFO | n_epochs: 901
+2026-09-16 13:31:26,678 | INFO | batch_size: 32
+2026-09-16 13:31:26,678 | INFO | env_steps: 100
+2026-09-16 13:31:26,679 | INFO | train_steps: 400
+2026-09-16 13:31:26,679 | INFO | L: 4
+2026-09-16 13:31:26,680 | INFO | action_space_dim: 6
+2026-09-16 13:31:26,680 | INFO | burn_in_len: 4
+2026-09-16 13:31:26,680 | INFO | im_horizon: 15
+2026-09-16 13:31:26,681 | INFO | n_frame_skip: 4
+2026-09-16 13:31:26,681 | INFO | n_sampling_steps: 3
+2026-09-16 13:31:26,682 | INFO | setup_wandb: True
+2026-09-16 13:31:26,682 | INFO | max_noop: 30
+2026-09-16 13:31:26,683 | INFO | lbda: 0.95
+2026-09-16 13:31:26,683 | INFO | gamma: 0.985
+2026-09-16 13:31:26,684 | INFO | entropy_weight: 0.001
+2026-09-16 13:31:26,684 | INFO | resume: False
+2026-09-16 13:31:26,685 | INFO | save_interval: 50
+2026-09-16 13:31:26,686 | INFO | lr: 0.0001
+2026-09-16 13:31:26,686 | INFO | eps: 1e-08
+2026-09-16 13:31:26,687 | INFO | wd: 0.01
+2026-09-16 13:31:26,687 | INFO | enable_tf32: True
+2026-09-16 13:31:26,688 | INFO | debug: False
+2026-09-16 13:31:26,688 | INFO | hf_repo_id: Marcorico/diamond
+2026-09-16 13:31:26,688 | INFO | epoch_to_load: 0
+2026-09-16 13:31:26,689 | INFO | log_every: 10
+2026-09-16 13:31:26,689 | INFO | Using device {self.device}
+2026-09-16 13:31:37,741 | WARNING | socket.send() raised exception.
+2026-09-16 13:31:37,742 | WARNING | socket.send() raised exception.

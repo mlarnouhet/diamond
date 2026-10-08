@@ -1,0 +1,120 @@
+_wandb:
+    value:
+        cli_version: 0.29.0
+        e:
+            32unp1y3tfks4j4wbywuc9a4dc15fuuv:
+                codePath: main.py
+                codePathLocal: main.py
+                cpu_count: 4
+                cpu_count_logical: 8
+                cudaVersion: "13.1"
+                disk:
+                    /:
+                        total: "1081101176832"
+                        used: "71489478656"
+                email: mlarnouhet@gmail.com
+                executable: /home/mlarn/diamond/.venv/bin/python
+                git:
+                    commit: 45b32bc9a98aab55ef2bb6ae31518815679c0bd0
+                    remote: https://github.com/mlarnouhet/diamond.git
+                gpu: NVIDIA GeForce GTX 1660 Ti
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Turing
+                      memoryTotal: "6442450944"
+                      name: NVIDIA GeForce GTX 1660 Ti
+                      uuid: GPU-cb278fff-6cf3-a72f-02be-9683b75bc56c
+                host: LAPTOP-9T2OI3KK
+                memory:
+                    total: "8204165120"
+                os: Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39
+                program: /home/mlarn/diamond/main.py
+                python: CPython 3.11.13
+                root: /home/mlarn/diamond
+                startedAt: "2026-09-16T11:31:25.400435Z"
+                writerId: 32unp1y3tfks4j4wbywuc9a4dc15fuuv
+        m:
+            - "1": epoch
+              "6":
+                - 3
+              "7": []
+            - "2": '*'
+              "5": 1
+              "6":
+                - 1
+              "7": []
+        python_version: 3.11.13
+        t:
+            "1":
+                - 1
+                - 49
+            "2":
+                - 1
+                - 49
+            "3":
+                - 7
+                - 13
+                - 16
+                - 41
+            "4": 3.11.13
+            "5": 0.29.0
+            "12": 0.29.0
+            "13": linux-x86_64
+L:
+    value: 4
+action_space_dim:
+    value: 6
+batch_size:
+    value: 32
+burn_in_len:
+    value: 4
+debug:
+    value: false
+enable_tf32:
+    value: true
+entropy_weight:
+    value: 0.001
+env_id:
+    value: ALE/Pong-v5
+env_steps:
+    value: 100
+epoch_to_load:
+    value: 0
+eps:
+    value: 1e-08
+gamma:
+    value: 0.985
+hf_repo_id:
+    value: Marcorico/diamond
+im_horizon:
+    value: 15
+lbda:
+    value: 0.95
+log_every:
+    value: 10
+lr:
+    value: 0.0001
+max_noop:
+    value: 30
+n_epochs:
+    value: 901
+n_frame_skip:
+    value: 4
+n_sampling_steps:
+    value: 3
+resume:
+    value: false
+run_id:
+    value: 1
+save_interval:
+    value: 50
+seed:
+    value: 42
+setup_wandb:
+    value: true
+task_name:
+    value: pong
+train_steps:
+    value: 400
+wd:
+    value: 0.01
