@@ -18,9 +18,10 @@ if __name__ == "__main__":
     start, end = data["trajectory_index"][index:index + 2]
     frames = data["observation"][start:end].permute(0, 2, 3, 1).numpy()
 
+    output = f"run_{args.run_id}_epoch_{args.epoch}_trajectory_{index}.mp4"
+    video = cv2.VideoWriter(output, cv2.VideoWriter_fourcc(*"mp4v"), FPS, (512, 512))
     for frame in frames:
         frame = cv2.resize(frame, (512, 512), interpolation=cv2.INTER_NEAREST)
-        cv2.imshow(f"Trajectory {index}", cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
-        if cv2.waitKey(round(1000 / FPS)) == 27:
-            break
-    cv2.destroyAllWindows()
+        video.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
+    video.release()
+    print(f"Saved {output}")
