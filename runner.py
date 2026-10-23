@@ -69,7 +69,8 @@ class Runner(nn.Module):
                 self.logger.info(f"{key}: {value}")
         else:
             self.wandb_run = self._setup_wnb(args)
-            self.wandb_run_id = self.wandb_run.id
+            if self.wandb_run is not None:
+                self.wandb_run_id = self.wandb_run.id
             logger.info(f"Starting run {args.run_id} on env {args.env_id}")
             for key, value in vars(args).items():
                 self.logger.info(f"{key}: {value}")
@@ -388,7 +389,8 @@ class Runner(nn.Module):
         self.start_epoch = epoch + 1
 
         self.wandb_run = self._setup_wnb(args)
-        self.wandb_run_id = self.wandb_run.id
+        if self.wandb_run is not None:
+            self.wandb_run_id = self.wandb_run.id
         self.logger.info(f"Loaded checkpoint for run {self.run_id} on env {self.env_id} at epoch {epoch}")
 
     def _save_to_hf(self, epoch: int, checkpoint_dir: str, dataset_dir: str):
@@ -413,7 +415,7 @@ class Runner(nn.Module):
 
     def _setup_wnb(self, args: Namespace) -> wandb.Run | None:
         if args.setup_wandb:
-            if args.resume:
+            if args.resume and self.wandb_run_id:
                 run = wandb.init(
                 project=f"Diamond",
                 entity=os.getenv("WANDB_ENTITY"),
@@ -455,4 +457,4 @@ class Runner(nn.Module):
     def finish(self):
         self.env.close()
         if self.wandb_run is not None:
-            self.run.finish()
+            self.wandb_run.finish()
