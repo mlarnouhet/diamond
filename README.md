@@ -89,7 +89,9 @@ These results showcase a model trained on the Pong environment, with The reward 
   </tr>
   <tr>
     <td width="50%" align="center" valign="top">
-      <img src="assets/average_reward_vs_epoch.png" alt="Pong mean reward over 10 evaluation episodes versus checkpoint epoch" width="400" height="300">
+      <div align="center">
+        <img src="assets/average_reward_vs_epoch.png" alt="Pong mean reward over 10 evaluation episodes versus checkpoint epoch" width="400" height="300">
+      </div>
     </td>
     <td width="50%" align="center" valign="top">
       <video src="https://github.com/user-attachments/assets/b805b771-55f8-4917-8e50-accd65b3459d" width="400" height="300" controls></video>
