@@ -82,13 +82,22 @@ uv run python main.py \
 
 These results showcase a model trained on the Pong environment, with The reward plot displaying the mean total reward over 10 episodes for a given checkpoint, and the video showing the trained actor-critic playing the game in the environment. The agent controls the right paddle and tries to return the ball past its opponent while defending its own goal.
 
-**Evaluation reward**
-
-<img src="assets/average_reward_vs_epoch.png" alt="Pong mean reward over 10 evaluation episodes versus checkpoint epoch" width="640">
-
-**Pong trajectory**
+<table>
+  <tr>
+    <th>Evaluation reward</th>
+    <th>Pong trajectory</th>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="assets/average_reward_vs_epoch.png" alt="Pong mean reward over 10 evaluation episodes versus checkpoint epoch" width="640">
+    </td>
+    <td width="50%" valign="top">
 
 https://github.com/user-attachments/assets/b805b771-55f8-4917-8e50-accd65b3459d
+
+    </td>
+  </tr>
+</table>
 
 ### World model predictions
 
