@@ -80,7 +80,7 @@ uv run python main.py \
 
 ## Results
 
-These results showcase a model trained on the Pong environment, with The reward plot displaying the mean total reward over 10 episodes for a given checkpoint, and the video showing the trained actor-critic playing the game in the environment. The agent controls the right paddle and tries to return the ball past its opponent while defending its own goal.
+These results showcase a model trained on the Pong environment, with the reward plot displaying the mean total reward over 10 episodes for a given checkpoint, and the video showing the trained actor-critic playing the game in the environment. The agent controls the right paddle and tries to return the ball past its opponent while defending its own goal.
 
 <table>
   <tr>
@@ -105,6 +105,6 @@ The following video compares real observations on the left with frames generated
 
 https://github.com/user-attachments/assets/24af7c8d-741f-4bf9-811c-22abdaf90676
 
-We can see that the world model is initially able to properly predict the observations, with the point counter even being consistent with what happens in the game (at least for the first goal), but gradually diverges over the course of the trajectory until the predicted observations and the world dynamics (such as the movement of the paddles and the ball) become nonsensical.
+We can see that the world model is initially able to predict plausible observations, with the point counter even being consistent with what happens in the game (at least for the first goal), but gradually diverges over the course of the trajectory until the predicted observations and the world dynamics (such as the movement of the paddles and the ball) become incoherent.
 
-This behavior is explained by the fact that the diffusion world model only uses the past 4 frames and actions to condition its output and feeds that output back into that frame buffer as it autoregressively generates the next frames. Since the generated frames are not perfect, the prediction errors accumulate over the course of the trajectory, which ultimately leads to nonsensical predictions. The agent is still able to learn because the training starts from real observations and the training horizon is short enough that the world model is still good enough during that time. Furthermore, the agent leverages a trained reward model and doesn't depend on the in-game scoreboard being properly rendered.
+This behavior is explained by the fact that the diffusion world model uses the past 4 frames and actions to condition its output and feeds that output back into that frame buffer as it autoregressively generates the next frames. Since the generated frames are not perfect, the prediction errors accumulate over the course of the trajectory, which ultimately leads to incoherent predictions. The agent is still able to learn because the training starts from real observations and the training horizon is short enough that the world model is still good enough during that time. 
