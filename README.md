@@ -19,7 +19,7 @@ uv sync
 Checkpoints are saved locally and automatically uploaded to Hugging Face. Authenticate to Hugging Face using:
 
 ```bash
-hf auth login
+uv run hf auth login
 ```
 
 In the commands below, replace `YOUR_HF_USERNAME/diamond` with a Hugging Face model repository of your choosing.
@@ -50,7 +50,7 @@ The action dimension must match the environment: `ALE/Pong-v5` uses six discrete
 | `--L` | `4` | Number of past frames and actions conditioning the diffusion model |
 | `--burn_in_len` | `4` | Number of observations used for burn in |
 | `--im_horizon` | `15` | Imagination horizon |
-| `--n_frame_skip` | `4` | Number of frmaes to skip when performing an action |
+| `--n_frame_skip` | `4` | Number of frames to skip when performing an action |
 | `--n_sampling_steps` | `3` | Number of denoising steps when sampling |
 | `--max_noop` | `30` | Maximum number of random initial no-op actions |
 | `--gamma` | `0.985` | Discount factor |
